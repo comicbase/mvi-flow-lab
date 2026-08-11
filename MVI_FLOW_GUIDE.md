@@ -18,9 +18,9 @@
 
 主要源码：
 
-- [`MainScreenViewModel.kt`](app/src/main/java/com/example/mviflowdemo/ui/main/MainScreenViewModel.kt)：Intent、UiState、UiEffect、LiveData、StateFlow 和 SharedFlow
-- [`MainScreen.kt`](app/src/main/java/com/example/mviflowdemo/ui/main/MainScreen.kt)：Compose 收集数据并渲染页面
-- [`MainScreenViewModelTest.kt`](app/src/test/java/com/example/mviflowdemo/ui/main/MainScreenViewModelTest.kt)：状态流和事件流的测试示例
+- [`MainScreenViewModel.kt`](app/src/main/java/com/example/mviflowlab/ui/main/MainScreenViewModel.kt)：Intent、UiState、UiEffect、LiveData、StateFlow 和 SharedFlow
+- [`MainScreen.kt`](app/src/main/java/com/example/mviflowlab/ui/main/MainScreen.kt)：Compose 收集数据并渲染页面
+- [`MainScreenViewModelTest.kt`](app/src/test/java/com/example/mviflowlab/ui/main/MainScreenViewModelTest.kt)：状态流和事件流的测试示例
 
 ## 一、先建立最简单的心智模型
 
@@ -81,7 +81,7 @@ View：根据状态渲染
 | 状态 Model | `MainUiState` |
 | 短暂 UI 效果 | `MainUiEffect` |
 | 状态处理者 | `MainScreenViewModel` |
-| View | `MviDemoRoute`、`MviDemoScreen` |
+| View | `MviFlowLabRoute`、`MviFlowLabScreen` |
 
 ### 点击“+1”时发生了什么？
 

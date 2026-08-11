@@ -1,4 +1,4 @@
-package com.example.mviflowdemo.ui.main
+package com.example.mviflowlab.ui.main
 
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.SnackbarHostState
@@ -20,7 +20,7 @@ class MainScreenTest {
   fun incrementButton_sendsIntentAndRendersNewState() {
     composeTestRule.setContent {
       var state by remember { mutableStateOf(MainUiState(count = 2)) }
-      MviDemoScreen(
+      MviFlowLabScreen(
         state = state,
         liveDataCount = 0,
         onIntent = {

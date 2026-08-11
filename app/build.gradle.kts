@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mviflowdemo"
+    namespace = "com.example.mviflowlab"
     compileSdk = 36
     defaultConfig {
-        applicationId = "com.example.mviflowdemo"
+        applicationId = "com.example.mviflowlab"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

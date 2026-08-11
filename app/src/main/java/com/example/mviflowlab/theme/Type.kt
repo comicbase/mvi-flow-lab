@@ -1,4 +1,4 @@
-package com.example.mviflowdemo.theme
+package com.example.mviflowlab.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

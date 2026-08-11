@@ -1,4 +1,4 @@
-package com.example.mviflowdemo.ui.main
+package com.example.mviflowlab.ui.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -43,10 +43,10 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mviflowdemo.theme.MviFlowLabTheme
+import com.example.mviflowlab.theme.MviFlowLabTheme
 
 @Composable
-fun MviDemoRoute(
+fun MviFlowLabRoute(
   modifier: Modifier = Modifier,
   viewModel: MainScreenViewModel = viewModel(),
 ) {
@@ -67,7 +67,7 @@ fun MviDemoRoute(
     }
   }
 
-  MviDemoScreen(
+  MviFlowLabScreen(
     state = state,
     liveDataCount = liveDataCount,
     onIntent = viewModel::onIntent,
@@ -78,7 +78,7 @@ fun MviDemoRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MviDemoScreen(
+fun MviFlowLabScreen(
   state: MainUiState,
   liveDataCount: Int,
   onIntent: (MainIntent) -> Unit,
@@ -129,7 +129,7 @@ fun MviDemoScreen(
 
 @Composable
 private fun LiveDataCard(count: Int, onIntent: (MainIntent) -> Unit) {
-  DemoCard(
+  LearningCard(
     title = "1. LiveData：生命周期感知状态",
     description = "ViewModel 只暴露 LiveData，内部使用 MutableLiveData。Compose 通过 observeAsState() 自动注册和移除观察者。",
     accent = true,
@@ -158,7 +158,7 @@ private fun LiveDataCard(count: Int, onIntent: (MainIntent) -> Unit) {
 
 @Composable
 private fun StateFlowCard(state: MainUiState, onIntent: (MainIntent) -> Unit) {
-  DemoCard(
+  LearningCard(
     title = "2. StateFlow：协程原生状态",
     description = "计数值保存在 UiState 中。Compose 用 collectAsStateWithLifecycle() 在活跃生命周期内收集。",
   ) {
@@ -178,7 +178,7 @@ private fun StateFlowCard(state: MainUiState, onIntent: (MainIntent) -> Unit) {
 
 @Composable
 private fun SharedFlowCard(onIntent: (MainIntent) -> Unit) {
-  DemoCard(
+  LearningCard(
     title = "3. SharedFlow：发送短暂效果",
     description = "点击后显示 Snackbar。此流 replay = 0，新订阅者不会收到已经发过的消息。",
     accent = true,
@@ -191,7 +191,7 @@ private fun SharedFlowCard(onIntent: (MainIntent) -> Unit) {
 
 @Composable
 private fun UserLoadingCard(state: MainUiState, onIntent: (MainIntent) -> Unit) {
-  DemoCard(
+  LearningCard(
     title = "4. 异步请求：状态归约",
     description = "加载中、数据和错误都进入同一个 UiState，页面只负责渲染。",
   ) {
@@ -256,7 +256,7 @@ private fun UserRow(user: User) {
 
 @Composable
 private fun ArchitectureCard() {
-  DemoCard(
+  LearningCard(
     title = "LiveData 与 StateFlow 怎么选？",
     description = "二者都能保存并重放最新状态。LiveData 自动感知 Android 生命周期；StateFlow 属于协程生态，可组合且跨平台。",
   ) {
@@ -270,7 +270,7 @@ private fun ArchitectureCard() {
 }
 
 @Composable
-private fun DemoCard(
+private fun LearningCard(
   title: String,
   description: String,
   accent: Boolean = false,
@@ -304,9 +304,9 @@ private fun DemoCard(
 
 @Preview(showBackground = true, widthDp = 390, heightDp = 860)
 @Composable
-private fun MviDemoPreview() {
+private fun MviFlowLabPreview() {
   MviFlowLabTheme {
-    MviDemoScreen(
+    MviFlowLabScreen(
       state = MainUiState(
         count = 3,
         users = listOf(User(1, "Ada", "Android Engineer")),

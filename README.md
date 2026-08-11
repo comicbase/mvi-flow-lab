@@ -2,6 +2,10 @@
 
 一个用 Jetpack Compose 演示 Android MVI、`LiveData`、`StateFlow` 与 `SharedFlow` 的最小项目。
 
+- Android 包名 / Application ID：`com.example.mviflowlab`
+- Application 类：`MviFlowLabApplication`
+- Compose 主题：`MviFlowLabTheme`
+
 完整的通俗讲解、源码导读和动手实验请阅读：[`MVI_FLOW_GUIDE.md`](MVI_FLOW_GUIDE.md)。
 
 如果对 Kotlin 语法不熟悉，请先阅读：[`KOTLIN_CODE_WALKTHROUGH.md`](KOTLIN_CODE_WALKTHROUGH.md)。它会逐段解释本项目中的 `it`、`by`、`::`、`copy()`、协程、Compose 和测试语法。

@@ -1,4 +1,4 @@
-package com.example.mviflowdemo.ui.main
+package com.example.mviflowlab.ui.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import junit.framework.TestCase.assertEquals

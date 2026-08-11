@@ -1,4 +1,4 @@
-package com.example.mviflowdemo.ui.main
+package com.example.mviflowlab.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -48,7 +48,7 @@ interface UserRepository {
   suspend fun loadUsers(shouldFail: Boolean): List<User>
 }
 
-class DemoUserRepository : UserRepository {
+class SampleUserRepository : UserRepository {
   override suspend fun loadUsers(shouldFail: Boolean): List<User> {
     delay(900)
     if (shouldFail) error("模拟网络请求失败")
@@ -61,7 +61,7 @@ class DemoUserRepository : UserRepository {
 }
 
 class MainScreenViewModel(
-  private val repository: UserRepository = DemoUserRepository(),
+  private val repository: UserRepository = SampleUserRepository(),
 ) : ViewModel() {
   private val _liveDataCount = MutableLiveData(0)
   val liveDataCount: LiveData<Int> = _liveDataCount

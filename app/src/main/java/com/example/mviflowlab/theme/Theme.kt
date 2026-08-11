@@ -1,4 +1,4 @@
-package com.example.mviflowdemo.theme
+package com.example.mviflowlab.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

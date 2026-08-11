@@ -1,14 +1,15 @@
 # 本项目 Kotlin 语法逐行导读
 
-这份文档面向 Kotlin 初学者。目标不是完整介绍 Kotlin，而是帮助你读懂当前 MVI Demo 中真正出现的语法。
+这份文档面向 Kotlin 初学者。目标不是完整介绍 Kotlin，而是帮助你读懂 MVI Flow Lab 中真正出现的语法。
 
 配套源码：
 
-- [`MainActivity.kt`](app/src/main/java/com/example/mviflowdemo/MainActivity.kt)
-- [`MainScreenViewModel.kt`](app/src/main/java/com/example/mviflowdemo/ui/main/MainScreenViewModel.kt)
-- [`MainScreen.kt`](app/src/main/java/com/example/mviflowdemo/ui/main/MainScreen.kt)
-- [`MainScreenViewModelTest.kt`](app/src/test/java/com/example/mviflowdemo/ui/main/MainScreenViewModelTest.kt)
-- [`MainScreenTest.kt`](app/src/androidTest/java/com/example/mviflowdemo/ui/main/MainScreenTest.kt)
+- [`MviFlowLabApplication.kt`](app/src/main/java/com/example/mviflowlab/MviFlowLabApplication.kt)
+- [`MainActivity.kt`](app/src/main/java/com/example/mviflowlab/MainActivity.kt)
+- [`MainScreenViewModel.kt`](app/src/main/java/com/example/mviflowlab/ui/main/MainScreenViewModel.kt)
+- [`MainScreen.kt`](app/src/main/java/com/example/mviflowlab/ui/main/MainScreen.kt)
+- [`MainScreenViewModelTest.kt`](app/src/test/java/com/example/mviflowlab/ui/main/MainScreenViewModelTest.kt)
+- [`MainScreenTest.kt`](app/src/androidTest/java/com/example/mviflowlab/ui/main/MainScreenTest.kt)
 
 建议每读一节，就在 Android Studio 中打开对应文件。看到文档中的代码后，回到源码找到同一段并设置断点。
 
@@ -66,15 +67,15 @@ users.add(user) // 可以修改列表内容
 
 ## 三、应用入口：逐行理解 MainActivity
 
-源码位置：[`MainActivity.kt`](app/src/main/java/com/example/mviflowdemo/MainActivity.kt)
+源码位置：[`MainActivity.kt`](app/src/main/java/com/example/mviflowlab/MainActivity.kt)
 
 ### 1. package
 
 ```kotlin
-package com.example.mviflowdemo
+package com.example.mviflowlab
 ```
 
-这表示当前类属于 `com.example.mviflowdemo` 包。包名主要用于组织代码和避免类名冲突。
+这表示当前类属于 `com.example.mviflowlab` 包。包名主要用于组织代码和避免类名冲突。Android 会先创建 Manifest 中注册的 `MviFlowLabApplication`，随后再启动 `MainActivity`。
 
 ### 2. import
 
@@ -137,7 +138,7 @@ super.onCreate(savedInstanceState)
 setContent {
     MviFlowLabTheme {
         Surface {
-            MviDemoRoute()
+            MviFlowLabRoute()
         }
     }
 }
@@ -147,13 +148,13 @@ setContent {
 
 ```kotlin
 setContent(content = {
-    MviDemoRoute()
+    MviFlowLabRoute()
 })
 ```
 
 ```kotlin
 setContent {
-    MviDemoRoute()
+    MviFlowLabRoute()
 }
 ```
 
@@ -166,14 +167,14 @@ MainActivity.onCreate()
         ↓
 setContent { ... }
         ↓
-MviDemoRoute()
+MviFlowLabRoute()
         ↓
-MviDemoScreen()
+MviFlowLabScreen()
 ```
 
 ## 四、MVI 的操作类型：sealed interface
 
-源码位置：[`MainScreenViewModel.kt`](app/src/main/java/com/example/mviflowdemo/ui/main/MainScreenViewModel.kt:21)
+源码位置：[`MainScreenViewModel.kt`](app/src/main/java/com/example/mviflowlab/ui/main/MainScreenViewModel.kt:21)
 
 ```kotlin
 sealed interface MainIntent {
@@ -331,7 +332,7 @@ interface UserRepository {
 实现类：
 
 ```kotlin
-class DemoUserRepository : UserRepository {
+class SampleUserRepository : UserRepository {
     override suspend fun loadUsers(shouldFail: Boolean): List<User> {
         delay(900)
         if (shouldFail) error("模拟网络请求失败")
@@ -358,7 +359,7 @@ class DemoUserRepository : UserRepository {
 
 ```kotlin
 class MainScreenViewModel(
-    private val repository: UserRepository = DemoUserRepository(),
+    private val repository: UserRepository = SampleUserRepository(),
 ) : ViewModel() {
 ```
 
@@ -367,7 +368,7 @@ class MainScreenViewModel(
 - `repository` 是构造参数；
 - `private val` 会同时把参数保存成私有属性；
 - 属性类型是接口 `UserRepository`；
-- 默认值是 `DemoUserRepository()`；
+- 默认值是 `SampleUserRepository()`；
 - `: ViewModel()` 表示继承 AndroidX ViewModel。
 
 正常运行时可以使用默认实现：
@@ -644,11 +645,11 @@ private fun sendEffect(effect: MainUiEffect) {
 
 ## 十八、Compose 函数：@Composable
 
-源码位置：[`MainScreen.kt`](app/src/main/java/com/example/mviflowdemo/ui/main/MainScreen.kt)
+源码位置：[`MainScreen.kt`](app/src/main/java/com/example/mviflowlab/ui/main/MainScreen.kt)
 
 ```kotlin
 @Composable
-fun MviDemoRoute(...) {
+fun MviFlowLabRoute(...) {
 }
 ```
 
@@ -667,7 +668,7 @@ Composable 函数不是返回一个 View 对象，而是描述在当前状态下
 ## 十九、函数参数、默认值和函数类型
 
 ```kotlin
-fun MviDemoRoute(
+fun MviFlowLabRoute(
     modifier: Modifier = Modifier,
     viewModel: MainScreenViewModel = viewModel(),
 )
@@ -676,13 +677,13 @@ fun MviDemoRoute(
 两个参数都有默认值，所以调用方可以直接写：
 
 ```kotlin
-MviDemoRoute()
+MviFlowLabRoute()
 ```
 
 也可以覆盖默认值：
 
 ```kotlin
-MviDemoRoute(modifier = Modifier.padding(16.dp))
+MviFlowLabRoute(modifier = Modifier.padding(16.dp))
 ```
 
 页面函数中的回调类型：
@@ -970,7 +971,7 @@ isLoading = false → enabled = true
 ## 三十一、高阶 Composable：最难的一行
 
 ```kotlin
-private fun DemoCard(
+private fun LearningCard(
     title: String,
     description: String,
     accent: Boolean = false,
@@ -992,12 +993,12 @@ content: @Composable ColumnScope.() -> Unit
 - `@Composable`：这个函数可以绘制 Compose UI；
 - `content`：这个函数参数的名字。
 
-通俗理解：调用者可以把一段“放在 Column 里面的 UI”传给 DemoCard。
+通俗理解：调用者可以把一段“放在 Column 里面的 UI”传给 LearningCard。
 
 调用：
 
 ```kotlin
-DemoCard(
+LearningCard(
     title = "标题",
     description = "说明",
 ) {
@@ -1008,7 +1009,7 @@ DemoCard(
 }
 ```
 
-DemoCard 内部执行：
+LearningCard 内部执行：
 
 ```kotlin
 Column {
@@ -1025,7 +1026,7 @@ Column {
 ```kotlin
 @Preview(showBackground = true, widthDp = 390, heightDp = 860)
 @Composable
-private fun MviDemoPreview() {
+private fun MviFlowLabPreview() {
     ...
 }
 ```
@@ -1043,7 +1044,7 @@ onIntent = {}
 
 ## 三十三、测试函数的简写
 
-源码位置：[`MainScreenViewModelTest.kt`](app/src/test/java/com/example/mviflowdemo/ui/main/MainScreenViewModelTest.kt)
+源码位置：[`MainScreenViewModelTest.kt`](app/src/test/java/com/example/mviflowlab/ui/main/MainScreenViewModelTest.kt)
 
 ```kotlin
 @Test
@@ -1137,7 +1138,7 @@ advanceUntilIdle()
 
 ## 三十七、Compose UI 测试中的 mutableStateOf
 
-源码位置：[`MainScreenTest.kt`](app/src/androidTest/java/com/example/mviflowdemo/ui/main/MainScreenTest.kt)
+源码位置：[`MainScreenTest.kt`](app/src/androidTest/java/com/example/mviflowlab/ui/main/MainScreenTest.kt)
 
 ```kotlin
 var state by remember {
@@ -1290,7 +1291,7 @@ repository.loadUsers()
 3. `_uiState.update`：观察旧状态和新状态；
 4. `repository.loadUsers()`：观察挂起和返回；
 5. `effects.collect`：观察 SharedFlow 效果；
-6. `MviDemoScreen()`：观察 Compose 重组时参数怎样变化。
+6. `MviFlowLabScreen()`：观察 Compose 重组时参数怎样变化。
 
 重点观察这些变量：
 
@@ -1381,7 +1382,7 @@ onIntent = { intent ->
 - `val state by ...` 中的 by 做了什么？
 - `viewModel::onIntent` 和 `viewModel.onIntent(...)` 有什么区别？
 - `state.errorMessage?.let` 什么时候执行？
-- `content: @Composable ColumnScope.() -> Unit` 为什么允许 DemoCard 插入自定义 UI？
+- `content: @Composable ColumnScope.() -> Unit` 为什么允许 LearningCard 插入自定义 UI？
 - FakeUserRepository 为什么让测试更稳定？
 
 ## 四十四、下一步学习顺序
